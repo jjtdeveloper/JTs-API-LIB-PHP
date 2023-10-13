@@ -1,10 +1,10 @@
 <?php
-require_once("GeneralAPI.php");
+namespace jtAPI;
 
 $accountInfo_EP = 'https://graph.microsoft.com/v1.0/me/';
-$redirectPage = 'https://vgs.lkfhosting.com/jt-testing/redirect.php';
+$redirectPage = '';
 
-class MessageHelper extends APIHelper{ // used to send and get messages
+class MicrosoftHelper extends APIHelper{ // used to send and get messages
     function send($message) {
         // $result = $this->postRequest("https://graph.microsoft.com/v1.0/me/sendMail/", $message);
         $result = $this->postRequest("https://graph.microsoft.com/v1.0/users/mediareleases@lkfmarketing.com/sendMail/", $message);
@@ -45,7 +45,7 @@ function microsoftTokenInit() { // Make sure to call establishSession() before c
 }
 
 function returnWithToken($url=null, $prompt="select_account") {
-    global $redirectPage;
+    $redirectPage = getRedirectPage();
     $_SESSION['prompt'] = $prompt;
     
     if (!isset($url)){
@@ -58,4 +58,14 @@ function returnWithToken($url=null, $prompt="select_account") {
     array_push($_SESSION['jt-return'], $url);
     
     go($redirectPage);
+}
+
+function getRedirectPage() {
+    global $redirectPage;
+    return $redirectPage;
+}
+
+function setRedirectPage($page) {
+    global $redirectPage;
+    $redirectPage = $page;
 }

@@ -1,9 +1,10 @@
 <?php
+namespace jtAPI;
 
 //-------------------------------------- Important Links --------------------------------------
 $settingsPage = 'https://vgs.lkfhosting.com/jt-testing/PRHelperBETA/settings.php';
-$selectMessagePage = 'https://vgs.lkfhosting.com/jt-testing/PRHelper/selectMessage.php';
-$selectedRecipientsPage = 'https://vgs.lkfhosting.com/jt-testing/PRHelper/selectRecipients.php';
+$selectMessagePage = 'https://vgs.lkfhosting.com/jt-testing/PR-Automator/selectMessage.php';
+$selectedRecipientsPage = 'https://vgs.lkfhosting.com/jt-testing/PR-Automator/selectRecipients.php';
 
 
 //------------------------------------- General API Class --------------------------------------

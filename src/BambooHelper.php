@@ -1,5 +1,6 @@
 <?php
-require_once("GeneralAPI.php");
+namespace jtAPI;
+
 class BambooHelper extends APIHelper {
     function getRequest($endpoint, $queries=null, $additionalHeaders=array()) {
         $ch = curl_init($endpoint);

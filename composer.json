@@ -1,0 +1,10 @@
+{
+    "name": "jjtdeveloper/jts-api-lib-php",
+    "description": "API Library for PHP projects created by Jordan Torres.",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "jtAPI\\": "src/"
+        }
+    }
+}
