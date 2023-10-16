@@ -16,26 +16,27 @@ class AirTableHelper extends APIHelper {
         }
         return $emails;
     }
-}
-function getAirtableData() {
-    $filename = 'data/airTable.json';
-    $airTableData = [];
-
-    if (file_exists($filename)) {
-        // Read the JSON file and decode its contents into a PHP array
-        $jsonData = file_get_contents($filename);
-        $airTableData = json_decode($jsonData, true);
-    } else {
-        // Create a new JSON file with an empty array
-        file_put_contents($filename, json_encode($airTableData));
-    }
-
-    return $airTableData;
-}
-
-function saveAirtableData($airTableData) {
-    global $airTableDataFP;
+    // ------------------------------------STATIC FUNCTIONS ---------------------------------
+    public static function getAirtableData() {
+        $filename = 'data/airTable.json';
+        $airTableData = [];
     
-    file_put_contents($airTableDataFP, json_encode($airTableData));
-    return;
+        if (file_exists($filename)) {
+            // Read the JSON file and decode its contents into a PHP array
+            $jsonData = file_get_contents($filename);
+            $airTableData = json_decode($jsonData, true);
+        } else {
+            // Create a new JSON file with an empty array
+            file_put_contents($filename, json_encode($airTableData));
+        }
+    
+        return $airTableData;
+    }
+    
+    public static function saveAirtableData($airTableData) {
+        global $airTableDataFP;
+        
+        file_put_contents($airTableDataFP, json_encode($airTableData));
+        return;
+    }
 }

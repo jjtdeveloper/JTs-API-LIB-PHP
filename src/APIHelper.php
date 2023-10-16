@@ -79,42 +79,40 @@ class APIHelper {
         }
         return $returnArray;
     }
+    // ------------------------------------STATIC FUNCTIONS ---------------------------------
+    public static function establishSession() {
+        if (session_status() == PHP_SESSION_NONE) { // MUST BE AT THE BEGINNING OF ALL THE FILES DONT JUST CALL SESSION START
+            session_start();
+        }
+    }
     
-
+    // FOR THE PROMPT ARGUMENT:
+    //none - no show login or consent
+    // login - request to reauthenticate
+    // consent - request the user consent
+    // select_account - auth server to choose list of account or single account
+    public static function getUrl() {
+        $currentUrl = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        return $currentUrl;
+    }
     
-}
-
-function establishSession() {
-    if (session_status() == PHP_SESSION_NONE) { // MUST BE AT THE BEGINNING OF ALL THE FILES DONT JUST CALL SESSION START
-        session_start();
+    public static function getUrlNoParams() {
+        $currentUrl = explode("?", $_SERVER['REQUEST_URI']);
+        return "https://". $_SERVER['HTTP_HOST'] . $currentUrl[0];
+    }
+    
+    public static function returnToPrev() {
+        $return_url = array_pop($_SESSION['jt-return']);
+        go($return_url);
+    }
+    
+    public static function go($url) {
+        header('Location: ' . $url);
+    }
+    
+    public static function paramStr($params) { // Turns an array into a string that can be put into html for a js function
+        $paramsString = "`" . implode("`,`" , $params) . "`";
+        return $paramsString;
     }
 }
 
-// FOR THE PROMPT ARGUMENT:
-//none - no show login or consent
-// login - request to reauthenticate
-// consent - request the user consent
-// select_account - auth server to choose list of account or single account
-function getUrl() {
-    $currentUrl = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    return $currentUrl;
-}
-
-function getUrlNoParams() {
-    $currentUrl = explode("?", $_SERVER['REQUEST_URI']);
-    return "https://". $_SERVER['HTTP_HOST'] . $currentUrl[0];
-}
-
-function returnToPrev() {
-    $return_url = array_pop($_SESSION['jt-return']);
-    go($return_url);
-}
-
-function go($url) {
-    header('Location: ' . $url);
-}
-
-function paramStr($params) { // Turns an array into a string that can be put into html for a js function
-    $paramsString = "`" . implode("`,`" , $params) . "`";
-    return $paramsString;
-}

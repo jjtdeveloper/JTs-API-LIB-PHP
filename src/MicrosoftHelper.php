@@ -4,7 +4,7 @@ include_once '_include.php';
 $accountInfo_EP = 'https://graph.microsoft.com/v1.0/me/';
 $redirectPage = '';
 
-class MicrosoftHelper extends APIHelper{ // used to send and get messages
+class MicrosoftHelper extends APIHelper { // used to send and get messages
     function send($message) {
         // $result = $this->postRequest("https://graph.microsoft.com/v1.0/me/sendMail/", $message);
         $result = $this->postRequest("https://graph.microsoft.com/v1.0/users/mediareleases@lkfmarketing.com/sendMail/", $message);
@@ -23,49 +23,47 @@ class MicrosoftHelper extends APIHelper{ // used to send and get messages
         $messageData = $this->getRequest("https://graph.microsoft.com/v1.0/users/mediareleases@lkfmarketing.com/messages/" . $messageID);
         return $messageData;
     }
-
-    
-}
-
-function microsoftTokenInit() { // Make sure to call establishSession() before calling this. Or establish the session yourself.
-    global $accountInfo_EP;
-    $token = $_SESSION['t'];
-    if (!isset($token)) {
-        returnWithToken();                                                                          // ----------REDIRECT TO LOGIN WE DONT HAVE A TOKEN----------
-    }
-    else {
-        $testcall = new APIHelper($token);
-        $result = $testcall->getRequest($accountInfo_EP);
-
-        if (!isset($result['displayName'])) {
-            returnWithToken();                                                                     // ------------REDIRECT TO LOGIN TOKEN IS EXPIRED------------
+    // ------------------------------------STATIC FUNCTIONS ---------------------------------
+    public static function microsoftTokenInit() { // Make sure to call establishSession() before calling this. Or establish the session yourself.
+        global $accountInfo_EP;
+        $token = $_SESSION['t'];
+        if (!isset($token)) {
+            MicrosoftHelper::returnWithToken();                                                                          // ----------REDIRECT TO LOGIN WE DONT HAVE A TOKEN----------
         }
-    }
-    return $token;
-}
-
-function returnWithToken($url=null, $prompt="select_account") {
-    $redirectPage = getRedirectPage();
-    $_SESSION['prompt'] = $prompt;
+        else {
+            $testcall = new APIHelper($token);
+            $result = $testcall->getRequest($accountInfo_EP);
     
-    if (!isset($url)){
-        $url= getUrlNoParams();
+            if (!isset($result['displayName'])) {
+                MicrosoftHelper::returnWithToken();                                                                     // ------------REDIRECT TO LOGIN TOKEN IS EXPIRED------------
+            }
+        }
+        return $token;
     }
-
-    if (!isset($_SESSION['jt-return'])) {
-        $_SESSION['jt-return'] = [];
-    }
-    array_push($_SESSION['jt-return'], $url);
     
-    go($redirectPage);
-}
-
-function getRedirectPage() {
-    global $redirectPage;
-    return $redirectPage;
-}
-
-function setRedirectPage($page) {
-    global $redirectPage;
-    $redirectPage = $page;
+    public static function returnWithToken($url=null, $prompt="select_account") {
+        $redirectPage = MicrosoftHelper::getRedirectPage();
+        $_SESSION['prompt'] = $prompt;
+        
+        if (!isset($url)){
+            $url= getUrlNoParams();
+        }
+    
+        if (!isset($_SESSION['jt-return'])) {
+            $_SESSION['jt-return'] = [];
+        }
+        array_push($_SESSION['jt-return'], $url);
+        
+        go($redirectPage);
+    }
+    
+    public static function getRedirectPage() {
+        global $redirectPage;
+        return $redirectPage;
+    }
+    
+    public static function setRedirectPage($page) {
+        global $redirectPage;
+        $redirectPage = $page;
+    }
 }
