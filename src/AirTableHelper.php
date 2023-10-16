@@ -1,5 +1,6 @@
 <?php
 namespace jtAPI;
+include_once 'APIHelper.php';
 
 $airTableDataFP = 'data/airTable.json';
 class AirTableHelper extends APIHelper {
