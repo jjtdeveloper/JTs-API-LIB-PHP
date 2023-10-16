@@ -103,7 +103,7 @@ class APIHelper {
     
     public static function returnToPrev() {
         $return_url = array_pop($_SESSION['jt-return']);
-        go($return_url);
+        APIHelper::go($return_url);
     }
     
     public static function go($url) {
