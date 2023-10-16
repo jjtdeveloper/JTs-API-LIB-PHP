@@ -1,6 +1,6 @@
 <?php
 namespace jtAPI;
-include_once 'APIHelper.php';
+include_once '_include.php';
 $accountInfo_EP = 'https://graph.microsoft.com/v1.0/me/';
 $redirectPage = '';
 

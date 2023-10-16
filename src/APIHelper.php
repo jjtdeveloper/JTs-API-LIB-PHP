@@ -1,6 +1,6 @@
 <?php
 namespace jtAPI;
-
+include_once '_include.php';
 //-------------------------------------- Important Links --------------------------------------
 $settingsPage = 'https://vgs.lkfhosting.com/jt-testing/PRHelperBETA/settings.php';
 $selectMessagePage = 'https://vgs.lkfhosting.com/jt-testing/PR-Automator/selectMessage.php';
