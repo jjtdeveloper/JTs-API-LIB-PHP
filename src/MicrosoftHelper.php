@@ -46,7 +46,7 @@ class MicrosoftHelper extends APIHelper { // used to send and get messages
         $_SESSION['prompt'] = $prompt;
         
         if (!isset($url)){
-            $url= getUrlNoParams();
+            $url= APIHelper::getUrlNoParams();
         }
     
         if (!isset($_SESSION['jt-return'])) {
@@ -54,7 +54,7 @@ class MicrosoftHelper extends APIHelper { // used to send and get messages
         }
         array_push($_SESSION['jt-return'], $url);
         
-        go($redirectPage);
+        APIHelper::go($redirectPage);
     }
     
     public static function getRedirectPage() {
