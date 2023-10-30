@@ -32,6 +32,7 @@ class MicrosoftHelper extends APIHelper { // used to send and get messages
             MicrosoftHelper::returnWithToken();                                                                          // ----------REDIRECT TO LOGIN WE DONT HAVE A TOKEN----------
         }
         else {
+            $_SESSION['reason'] = "else";
             $testcall = new APIHelper($token);
             $result = $testcall->getRequest($accountInfo_EP);
     
@@ -47,7 +48,7 @@ class MicrosoftHelper extends APIHelper { // used to send and get messages
         $redirectPage = MicrosoftHelper::getRedirectPage();
         $_SESSION['prompt'] = $prompt;
         
-        if (!isset($url)){
+        if ($url == null){
             $url= APIHelper::getUrlNoParams();
         }
     
