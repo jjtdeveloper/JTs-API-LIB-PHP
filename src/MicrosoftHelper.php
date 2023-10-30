@@ -26,7 +26,7 @@ class MicrosoftHelper extends APIHelper { // used to send and get messages
     // ------------------------------------STATIC FUNCTIONS ---------------------------------
     public static function microsoftTokenInit() { // Make sure to call establishSession() before calling this. Or establish the session yourself.
         global $accountInfo_EP;
-        $token = $_SESSION['t'];
+        $token = $_SESSION['microsoft-t'];
         if (!isset($token)) {
             MicrosoftHelper::returnWithToken();                                                                          // ----------REDIRECT TO LOGIN WE DONT HAVE A TOKEN----------
         }
