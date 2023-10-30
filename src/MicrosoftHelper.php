@@ -28,6 +28,7 @@ class MicrosoftHelper extends APIHelper { // used to send and get messages
         global $accountInfo_EP;
         $token = $_SESSION['microsoft-t'];
         if (!isset($token)) {
+            $_SESSION['reason'] = "no token";
             MicrosoftHelper::returnWithToken();                                                                          // ----------REDIRECT TO LOGIN WE DONT HAVE A TOKEN----------
         }
         else {
@@ -35,6 +36,7 @@ class MicrosoftHelper extends APIHelper { // used to send and get messages
             $result = $testcall->getRequest($accountInfo_EP);
     
             if (!isset($result['displayName'])) {
+                $_SESSION['reason'] = "test failed";
                 MicrosoftHelper::returnWithToken();                                                                     // ------------REDIRECT TO LOGIN TOKEN IS EXPIRED------------
             }
         }
